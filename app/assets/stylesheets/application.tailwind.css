@@ -1,0 +1,12 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import 'actiontext.css';
+
+@import "animation.css";
+@import "dropdown.css";
+@import "forms.css";
+@import "mentions.css";
+@import "slideover.css";
+
+@import "flatpickr/dist/flatpickr.css"

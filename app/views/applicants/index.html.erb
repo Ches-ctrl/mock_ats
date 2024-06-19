@@ -1,0 +1,14 @@
+<div class="flex items-baseline justify-between mb-6">
+  <h2 class="mt-6 text-3xl font-extrabold text-gray-700">
+    Applicants
+  </h2>
+  <%= link_to "Add a new applicant", new_applicant_path, class: "btn-primary-outline", data: { action: "click->slideover#open", remote: true } %>
+</div>
+<div class="flex mb-6 justify-end">
+  <%= render "filter_form" %>
+</div>
+<div class="flex items-baseline justify-baseline px-10 md:px-6">
+  <%= updates_for current_user.account, :applicants do %>
+    <%= render "list", grouped_applicants: @grouped_applicants %>
+  <% end %>
+</div>
