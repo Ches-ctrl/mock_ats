@@ -46,4 +46,10 @@ Rails.application.routes.draw do
   devise_scope :user do
     root to: 'devise/sessions#new'
   end
+
+  namespace :api do
+    namespace :v1, defaults: { format: :json } do
+      resources :jobs
+    end
+  end
 end

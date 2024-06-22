@@ -30,4 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  api:
+    errors:
+      invalid_content_type: Invalid content type header
+      server: An error ocurred
+      not_found: Couldn't find the record
+      missing_param: A required param is missing
