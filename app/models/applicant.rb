@@ -19,6 +19,8 @@ class Applicant < ApplicationRecord
     active: 'active',
     inactive: 'inactive'
   }
+  
+  attr_accessor :easy_apply
 
   validates_presence_of :first_name, :last_name, :email
 

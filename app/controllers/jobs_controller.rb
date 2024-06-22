@@ -1,8 +1,8 @@
 class JobsController < ApplicationController
   include Filterable
 
-  before_action :set_job, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
+  before_action :set_job, only: %i[ show edit update destroy apply]
+  before_action :authenticate_user!, except: :apply
 
   def index
     @jobs = filter!(Job).for_account(current_user.account_id)
@@ -62,6 +62,11 @@ class JobsController < ApplicationController
   def destroy
     @job.destroy
     render operations: cable_car.remove(selector: dom_id(@job))
+  end
+
+  def apply
+    @applicant = Applicant.new
+    @easy_apply = true
   end
 
   private

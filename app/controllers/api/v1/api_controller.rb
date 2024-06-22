@@ -52,22 +52,22 @@ class Api::V1::ApiController < ApplicationController
 
     return if performed?
 
-    render json: { error: I18n.t('api.errors.server') }, status: :internal_server_error
+    render json: { error: ErrorMessage.message_for('INTERNAL_SERVER_ERROR') || I18n.t('api.errors.server') }, status: :internal_server_error
   end
 
   def render_not_found(exception)
     logger.info(exception) # for logging
-    render json: { error: I18n.t('api.errors.not_found') }, status: :not_found
+    render json: { error: ErrorMessage.message_for('NOT_FOUND') || I18n.t('api.errors.not_found') }, status: :not_found
   end
 
   def render_record_invalid(exception)
     logger.info(exception) # for logging
-    render json: { errors: exception.record.errors.as_json }, status: :bad_request
+    render json: { errors: ErrorMessage.message_for('UNPROCESSABLE') || exception.record.errors.as_json }, status: :bad_request
   end
 
   def render_parameter_missing(exception)
     logger.info(exception) # for logging
-    render json: { error: I18n.t('api.errors.missing_param') }, status: :unprocessable_entity
+    render json: { error: ErrorMessage.message_for('PARAMETER_MISSING') || I18n.t('api.errors.missing_param') }, status: :unprocessable_entity
   end
 
   def render_success(message)

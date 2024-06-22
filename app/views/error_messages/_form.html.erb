@@ -1,0 +1,41 @@
+<%= form_with(
+  model: error_message,
+  id: 'error_message-form',
+  html: { class: "space-y-6" },
+  data: { remote: true }
+) do |form| %>
+  <% if error_message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(error_message.errors.count, "error") %> prohibited this error message from being saved:</h2>
+
+      <ul>
+        <% error_message.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :status_code %>
+    <div class="mt-1">
+      <%= form.text_field :status_code %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :message %>
+    <div class="mt-1">
+      <%= form.text_field :message %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :reference %>
+    <div class="mt-1">
+      <%= form.text_field :reference %>
+    </div>
+  </div>
+
+  <%= form.submit 'Submit', class: 'btn-primary float-right' %>
+<% end %>

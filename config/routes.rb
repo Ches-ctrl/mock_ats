@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   end
   
   resources :invites, only: %i[create update]
-  resources :jobs
+  resources :jobs do
+    get :apply, on: :member
+  end
+  resources :error_messages
   resources :notifications, only: %i[index]
   resources :users
   get 'invite', to: 'invites#new', as: 'accept_invite'

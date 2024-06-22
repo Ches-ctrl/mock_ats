@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_031051) do
+ActiveRecord::Schema.define(version: 2024_06_22_170821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -108,15 +108,24 @@ ActiveRecord::Schema.define(version: 2022_01_28_031051) do
     t.index ["user_id"], name: "index_emails_on_user_id"
   end
 
+  create_table "error_messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "status_code"
+    t.string "message"
+    t.string "reference"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "jobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
+    t.string "status"
+    t.string "job_type"
     t.string "location"
-    t.string "status", default: "open", null: false
-    t.string "job_type", default: "full_time", null: false
     t.uuid "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_jobs_on_account_id"
+    t.index ["job_type"], name: "index_jobs_on_job_type"
     t.index ["status"], name: "index_jobs_on_status"
   end
 
@@ -146,6 +155,7 @@ ActiveRecord::Schema.define(version: 2022_01_28_031051) do
     t.datetime "invited_at", precision: 6
     t.datetime "accepted_invite_at", precision: 6
     t.uuid "invited_by_id"
+    t.boolean "admin"
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_alias"], name: "index_users_on_email_alias"
