@@ -76,3 +76,6 @@ gem "inline_svg", "~> 1.8"
 gem "pg_search", "~> 2.3"
 
 gem "sidekiq", "~> 6.4"
+
+gem 'pry'
+gem 'pagy'
