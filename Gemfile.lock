@@ -86,7 +86,6 @@ GEM
     cable_ready (5.0.0.pre8)
       rails (>= 5.2)
       thread-local (>= 1.1.0)
-    choice (0.2.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
@@ -184,11 +183,6 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-erd (1.7.2)
-      activerecord (>= 4.2)
-      activesupport (>= 4.2)
-      choice (~> 0.2.0)
-      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     railties (7.0.1)
@@ -205,10 +199,6 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rexml (3.3.0)
-      strscan
-    ruby-graphviz (1.2.5)
-      rexml
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     sidekiq (6.4.0)
@@ -271,7 +261,6 @@ DEPENDENCIES
   pry
   puma (~> 5.0)
   rails (~> 7.0.1)
-  rails-erd
   redis (~> 4.0)
   sidekiq (~> 6.4)
   sprockets-rails
