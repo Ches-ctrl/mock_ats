@@ -76,5 +76,4 @@ gem "pg_search", "~> 2.3"
 
 gem "sidekiq", "~> 6.4"
 
-gem 'pry'
 gem 'pagy'
