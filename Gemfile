@@ -59,7 +59,6 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -76,3 +75,5 @@ gem "inline_svg", "~> 1.8"
 gem "pg_search", "~> 2.3"
 
 gem "sidekiq", "~> 6.4"
+
+gem 'pagy'

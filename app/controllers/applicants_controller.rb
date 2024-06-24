@@ -2,7 +2,7 @@ class ApplicantsController < ApplicationController
   include Filterable
 
   before_action :set_applicant, only: %i[ show edit update destroy change_stage ]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, unless: :easy_apply
 
   # GET /applicants or /applicants.json
   def index
@@ -31,9 +31,14 @@ class ApplicantsController < ApplicationController
   def create
     @applicant = Applicant.new(applicant_params)
     if @applicant.save
-      html = render_to_string(partial: 'card', locals: { applicant: @applicant })
-      render operations: cable_car
-        .dispatch_event(name: 'submit:success')
+      if easy_apply
+        flash[:success] = 'Job application has been submitted successfully.'
+        redirect_to apply_job_path(@applicant.job) 
+      else
+        html = render_to_string(partial: 'card', locals: { applicant: @applicant })
+        render operations: cable_car
+          .dispatch_event(name: 'submit:success')
+      end
     else
       html = render_to_string(partial: 'form', locals: { applicant: @applicant })
       render operations: cable_car
@@ -77,10 +82,14 @@ class ApplicantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
   def applicant_params
-    params.require(:applicant).permit(:first_name, :last_name, :email, :phone, :stage, :status, :job_id, :resume)
+    params.require(:applicant).permit(:first_name, :last_name, :email, :phone, :stage, :status, :job_id, :resume, :easy_apply)
   end
 
   def search_params
     params.permit(:query, :job, :sort)
+  end
+  
+  def easy_apply
+    applicant_params[:easy_apply].present?
   end
 end

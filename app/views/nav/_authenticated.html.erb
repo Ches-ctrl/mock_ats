@@ -6,5 +6,8 @@
   <%= turbo_stream_from current_user, :notifications %>
   <%= render "nav/notifications", user: current_user %>
   <%= render "nav/settings_menu" %>
+  <% if current_user.admin %>
+    <%= link_to "Error Messages", error_messages_path, class: "rounded px-2 py-1 text-gray-700 hover:text-gray-900 hover:bg-gray-200" %>
+  <% end %>
   <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "rounded px-2 py-1 text-gray-700 hover:text-gray-900 hover:bg-gray-200" %>
 </div>

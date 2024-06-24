@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   end
   
   resources :invites, only: %i[create update]
-  resources :jobs
+  resources :jobs do
+    get :apply, on: :member
+  end
+  resources :error_messages
   resources :notifications, only: %i[index]
   resources :users
   get 'invite', to: 'invites#new', as: 'accept_invite'
@@ -45,5 +48,16 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     root to: 'devise/sessions#new'
+  end
+
+  namespace :api do
+    namespace :v1, defaults: { format: :json } do
+      resources :jobs, only: :index do
+        resources :applicants, only: :create
+      end
+      resources :companies, controller: :accounts do
+        resources :jobs, only: %i[index show create]
+      end
+    end
   end
 end
